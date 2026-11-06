@@ -8,8 +8,7 @@
   <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
-  <canvas class="field" aria-hidden="true"></canvas>
-  <div class="grid" aria-hidden="true"></div>
+  <a class="skip" href="#main">跳到正文</a>
   <header>
     <div class="wrap">
       <a class="name" href="index.html">桃子无限科技有限公司</a>
@@ -21,9 +20,9 @@
       </nav>
     </div>
   </header>
-  <main class="page">
-    <article class="wrap prose reveal">
-      <p class="kicker"><span class="dot"></span>COMPANY</p>
+  <main id="main" class="page">
+    <article class="wrap prose enter">
+      <p class="kicker">COMPANY</p>
       <h1>公司介绍</h1>
       <p>桃子无限科技有限公司运营「桃子小剧」，也是这个网站的主办单位。</p>
       <p>公司的事情比较集中：维护这款短剧 App，处理用户反馈，把用户协议和隐私政策放在这里。网页上不注册、不付款，看剧请用 App。</p>
@@ -32,11 +31,16 @@
   </main>
   <footer>
     <div class="wrap">
-      <p>桃子无限科技有限公司</p>
-      <p><a href="agreement.html">用户协议</a> · <a href="privacy.html">隐私政策</a></p>
+      <strong>桃子无限科技有限公司</strong>
+      <ul class="footer-links">
+        <li><a href="about.html">公司介绍</a></li>
+        <li><a href="product.html">桃子小剧</a></li>
+        <li><a href="contact.html">联系我们</a></li>
+        <li><a href="agreement.html">用户协议</a></li>
+        <li><a href="privacy.html">隐私政策</a></li>
+      </ul>
       <p class="icp">ICP 备案号审核通过后填写。查询：<a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">beian.miit.gov.cn</a></p>
     </div>
   </footer>
-  <script src="assets/motion.js"></script>
 </body>
 </html>

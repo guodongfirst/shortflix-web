@@ -4,9 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>联系我们 - 桃子无限科技有限公司</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
+  <canvas class="field" aria-hidden="true"></canvas>
+  <div class="grid" aria-hidden="true"></div>
   <header>
     <div class="wrap">
       <a class="name" href="index.html">桃子无限科技有限公司</a>
@@ -18,13 +21,14 @@
       </nav>
     </div>
   </header>
-  <main>
-    <div class="wrap">
+  <main class="page">
+    <article class="wrap prose reveal">
+      <p class="kicker"><span class="dot"></span>CONTACT</p>
       <h1>联系我们</h1>
       <p>邮箱：<a href="mailto:taozixiaoju2026@163.com">taozixiaoju2026@163.com</a></p>
       <p>时间：工作日 14:00–20:00</p>
       <p>在 App 里反馈：我的 — 用户反馈。写清楚怎么操作的、实际看到了什么。</p>
-    </div>
+    </article>
   </main>
   <footer>
     <div class="wrap">
@@ -33,5 +37,6 @@
       <p class="icp">ICP 备案号审核通过后填写。查询：<a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">beian.miit.gov.cn</a></p>
     </div>
   </footer>
+  <script src="assets/motion.js"></script>
 </body>
 </html>

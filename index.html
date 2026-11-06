@@ -5,9 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>桃子无限科技有限公司</title>
   <meta name="description" content="桃子无限科技有限公司运营短剧应用桃子小剧。">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
+  <canvas class="field" aria-hidden="true"></canvas>
+  <div class="grid" aria-hidden="true"></div>
   <header>
     <div class="wrap">
       <a class="name" href="index.html">桃子无限科技有限公司</a>
@@ -20,13 +23,33 @@
     </div>
   </header>
   <main>
-    <div class="wrap">
-      <h1>桃子无限科技有限公司</h1>
-      <p>我们做短剧 App「桃子小剧」。打开就能看剧，也可以收藏。看到哪一集记在手机上，换一部接着看。现在这个版本不用注册。</p>
-      <p>剧是合作方提供的，有的剧会因为授权到期或网络问题暂时看不了。</p>
-      <p>使用上的问题，发邮件到 <a href="mailto:taozixiaoju2026@163.com">taozixiaoju2026@163.com</a>，工作日 14:00–20:00 处理。也可以在 App 里打开「我的 — 用户反馈」。</p>
-      <p>协议在这里：<a href="agreement.html">用户协议</a>，<a href="privacy.html">隐私政策</a>。</p>
-    </div>
+    <section class="hero wrap">
+      <div class="reveal">
+        <p class="kicker"><span class="dot"></span>TAOZI INFINITE</p>
+        <h1><span class="shine">桃子无限<br>科技有限公司</span></h1>
+        <p class="lead">我们做短剧 App「桃子小剧」。打开就能看剧，也可以收藏。看到哪一集记在手机上，换一部接着看。现在这个版本不用注册。</p>
+      </div>
+      <div class="stage" aria-hidden="true">
+        <div class="ring"></div>
+        <div class="ring-b"></div>
+        <div class="ring-c"></div>
+        <div class="core">桃</div>
+      </div>
+    </section>
+    <section class="specs wrap">
+      <article class="spec">
+        <b>01 内容</b>
+        <p>剧是合作方提供的，有的剧会因为授权到期或网络问题暂时看不了。</p>
+      </article>
+      <article class="spec">
+        <b>02 联系</b>
+        <p>发邮件到 <a href="mailto:taozixiaoju2026@163.com">taozixiaoju2026@163.com</a>，工作日 14:00–20:00。App 里也可以从「我的 — 用户反馈」提交。</p>
+      </article>
+      <article class="spec">
+        <b>03 协议</b>
+        <p><a href="agreement.html">用户协议</a><br><a href="privacy.html">隐私政策</a></p>
+      </article>
+    </section>
   </main>
   <footer>
     <div class="wrap">
@@ -35,5 +58,6 @@
       <p class="icp">ICP 备案号审核通过后填写。查询：<a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">beian.miit.gov.cn</a></p>
     </div>
   </footer>
+  <script src="assets/motion.js"></script>
 </body>
 </html>

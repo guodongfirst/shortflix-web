@@ -1,0 +1,51 @@
+name: Deploy web
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: shortflix-web-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Prepare SSH
+        env:
+          ECS_SSH_KEY: ${{ secrets.ECS_SSH_KEY }}
+          ECS_KNOWN_HOSTS: ${{ secrets.ECS_KNOWN_HOSTS }}
+        run: |
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$ECS_SSH_KEY" > ~/.ssh/id_ed25519
+          printf '%s\n' "$ECS_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/id_ed25519 ~/.ssh/known_hosts
+      - name: Upload release
+        env:
+          ECS_HOST: ${{ secrets.ECS_HOST }}
+          ECS_PORT: ${{ secrets.ECS_PORT }}
+          ECS_USER: ${{ secrets.ECS_USER }}
+        run: |
+          ssh -p "$ECS_PORT" "$ECS_USER@$ECS_HOST" \
+            "install -d -m 755 /opt/shortflix/releases/$GITHUB_SHA/web"
+          scp -P "$ECS_PORT" \
+            index.html about.html product.html contact.html agreement.html privacy.html 404.html \
+            "$ECS_USER@$ECS_HOST:/opt/shortflix/releases/$GITHUB_SHA/web/"
+          scp -P "$ECS_PORT" -r assets \
+            "$ECS_USER@$ECS_HOST:/opt/shortflix/releases/$GITHUB_SHA/web/"
+      - name: Release and verify
+        env:
+          ECS_HOST: ${{ secrets.ECS_HOST }}
+          ECS_PORT: ${{ secrets.ECS_PORT }}
+          ECS_USER: ${{ secrets.ECS_USER }}
+        run: |
+          ssh -p "$ECS_PORT" "$ECS_USER@$ECS_HOST" \
+            "sudo /usr/local/sbin/shortflix-release-web $GITHUB_SHA"

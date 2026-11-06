@@ -1,0 +1,80 @@
+body {
+  margin: 0;
+  color: #222;
+  background: #fff;
+  font: 16px/1.8 "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+
+a { color: #8f3d2a; }
+
+.wrap {
+  width: min(680px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+header {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+header .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding: 18px 0;
+}
+
+.name {
+  color: inherit;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+}
+
+nav a {
+  color: #444;
+  text-decoration: none;
+}
+
+nav a[aria-current="page"] {
+  color: #222;
+  text-decoration: underline;
+}
+
+main { padding: 36px 0 56px; }
+
+h1 {
+  margin: 0 0 16px;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+h2 {
+  margin: 28px 0 8px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+p { margin: 0 0 12px; }
+
+ul { margin: 0 0 12px; padding-left: 1.2em; }
+
+li + li { margin-top: 4px; }
+
+.meta { color: #666; }
+
+footer {
+  border-top: 1px solid #e5e5e5;
+  padding: 20px 0 36px;
+  color: #666;
+  font-size: 14px;
+}
+
+footer p { margin: 0 0 6px; }

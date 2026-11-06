@@ -124,6 +124,7 @@ nav a {
   min-height: 44px;
   padding: 0 16px;
   border-radius: 999px;
+  overflow: hidden;
   color: #d9d3cb;
   font-size: 15px;
   text-decoration: none;

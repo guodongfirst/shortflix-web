@@ -29,23 +29,43 @@ jobs:
           printf '%s\n' "$ECS_KNOWN_HOSTS" > ~/.ssh/known_hosts
           chmod 600 ~/.ssh/id_ed25519 ~/.ssh/known_hosts
       - name: Upload release
+        timeout-minutes: 4
         env:
           ECS_HOST: ${{ secrets.ECS_HOST }}
           ECS_PORT: ${{ secrets.ECS_PORT }}
           ECS_USER: ${{ secrets.ECS_USER }}
         run: |
-          ssh -p "$ECS_PORT" "$ECS_USER@$ECS_HOST" \
-            "install -d -m 755 /opt/shortflix/releases/$GITHUB_SHA/web"
-          scp -P "$ECS_PORT" \
-            index.html about.html product.html contact.html agreement.html privacy.html 404.html \
-            "$ECS_USER@$ECS_HOST:/opt/shortflix/releases/$GITHUB_SHA/web/"
-          scp -P "$ECS_PORT" -r assets \
-            "$ECS_USER@$ECS_HOST:/opt/shortflix/releases/$GITHUB_SHA/web/"
+          install -d release-payload
+          cp index.html about.html product.html contact.html agreement.html privacy.html 404.html release-payload/
+          cp -R assets release-payload/assets
+          ssh_opts=(
+            -p "$ECS_PORT"
+            -o BatchMode=yes
+            -o ConnectTimeout=20
+            -o ConnectionAttempts=1
+            -o ServerAliveInterval=10
+            -o ServerAliveCountMax=3
+            -o IPQoS=throughput
+          )
+          remote="/opt/shortflix/releases/$GITHUB_SHA/web"
+          upload() {
+            ssh "${ssh_opts[@]}" "$ECS_USER@$ECS_HOST" "install -d -m 755 '$remote'"
+            tar -C release-payload -cf - . | ssh "${ssh_opts[@]}" "$ECS_USER@$ECS_HOST" \
+              "tar -C '$remote' -xf - && test -f '$remote/index.html'"
+          }
+          if ! upload; then
+            echo "upload failed, retrying once" >&2
+            sleep 5
+            upload
+          fi
       - name: Release and verify
+        timeout-minutes: 5
         env:
           ECS_HOST: ${{ secrets.ECS_HOST }}
           ECS_PORT: ${{ secrets.ECS_PORT }}
           ECS_USER: ${{ secrets.ECS_USER }}
         run: |
-          ssh -p "$ECS_PORT" "$ECS_USER@$ECS_HOST" \
-            "sudo /usr/local/sbin/shortflix-release-web $GITHUB_SHA"
+          ssh -p "$ECS_PORT" \
+            -o BatchMode=yes -o ConnectTimeout=20 -o ConnectionAttempts=1 \
+            -o ServerAliveInterval=10 -o ServerAliveCountMax=3 -o IPQoS=throughput \
+            "$ECS_USER@$ECS_HOST" "sudo /usr/local/sbin/shortflix-release-web $GITHUB_SHA"

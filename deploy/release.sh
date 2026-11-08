@@ -5,11 +5,14 @@ release_id=${1:?release id is required}
 [[ "$release_id" =~ ^[0-9a-f]{40}$ ]] || { echo "Invalid release id" >&2; exit 2; }
 
 base_dir=/opt/shortflix
-release_dir="$base_dir/releases/$release_id/web"
+release_root="$base_dir/releases/$release_id/web"
+release_dir="$release_root"
 live_dir="$base_dir/web/dist"
 previous_dir="$base_dir/web/previous"
 
 [[ -f "$release_dir/index.html" ]] || { echo "Release is missing index.html" >&2; exit 2; }
+[[ -f "$release_root/SHA256SUMS" ]] || { echo "Release checksum manifest is missing" >&2; exit 2; }
+(cd "$release_root" && sha256sum -c SHA256SUMS)
 
 exec 9>"$base_dir/.deploy-web.lock"
 flock -n 9 || { echo "Another web deployment is running" >&2; exit 1; }

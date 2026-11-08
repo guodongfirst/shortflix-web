@@ -19,6 +19,16 @@ jobs:
     steps:
       - name: Check out source
         uses: actions/checkout@v4
+      - name: Validate and assemble immutable release
+        run: |
+          install -d release-payload/scripts
+          for file in index.html about.html product.html contact.html agreement.html privacy.html 404.html; do
+            test -s "$file"
+            cp "$file" release-payload/
+          done
+          cp -R assets release-payload/assets
+          install -m 755 deploy/release.sh release-payload/scripts/release.sh
+          (cd release-payload && find . -type f ! -name SHA256SUMS -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS)
       - name: Prepare SSH
         env:
           ECS_SSH_KEY: ${{ secrets.ECS_SSH_KEY }}
@@ -35,9 +45,6 @@ jobs:
           ECS_PORT: ${{ secrets.ECS_PORT }}
           ECS_USER: ${{ secrets.ECS_USER }}
         run: |
-          install -d release-payload
-          cp index.html about.html product.html contact.html agreement.html privacy.html 404.html release-payload/
-          cp -R assets release-payload/assets
           ssh_opts=(
             -p "$ECS_PORT"
             -o BatchMode=yes
@@ -51,7 +58,7 @@ jobs:
           upload() {
             ssh "${ssh_opts[@]}" "$ECS_USER@$ECS_HOST" "install -d -m 755 '$remote'"
             tar -C release-payload -cf - . | ssh "${ssh_opts[@]}" "$ECS_USER@$ECS_HOST" \
-              "tar -C '$remote' -xf - && test -f '$remote/index.html'"
+              "tar -C '$remote' -xf - && cd '$remote' && sha256sum -c SHA256SUMS && test -f index.html"
           }
           if ! upload; then
             echo "upload failed, retrying once" >&2

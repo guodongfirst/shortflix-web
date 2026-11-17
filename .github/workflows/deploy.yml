@@ -27,6 +27,8 @@ jobs:
             cp "$file" release-payload/
           done
           cp -R assets release-payload/assets
+          cp -R taozi release-payload/taozi
+          cp -R .well-known release-payload/.well-known
           install -m 755 deploy/release.sh release-payload/scripts/release.sh
           (cd release-payload && find . -type f ! -name SHA256SUMS -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS)
       - name: Prepare SSH

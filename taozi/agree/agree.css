@@ -1,81 +1,157 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 body {
   margin: 0;
-  color: #222;
   background: #fff;
-  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", sans-serif;
-  font-size: 16px;
-  line-height: 1.75;
+  color: #333;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.8;
+  word-break: break-word;
 }
 
-main {
-  box-sizing: border-box;
+.page {
   max-width: 720px;
   margin: 0 auto;
-  padding: 20px 16px 48px;
+  padding:
+    max(16px, env(safe-area-inset-top))
+    max(16px, env(safe-area-inset-right))
+    max(32px, env(safe-area-inset-bottom))
+    max(16px, env(safe-area-inset-left));
 }
 
-h1 {
+.doc-header {
+  margin-bottom: 24px;
+}
+
+.doc-header h1 {
   margin: 0 0 8px;
-  font-size: 1.5rem;
-  line-height: 1.35;
-  font-weight: 600;
+  font-size: 22px;
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+.doc-meta {
+  margin: 0;
+  color: #666;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.intro,
+.notice,
+section,
+.sdk-item,
+.contact {
+  margin-bottom: 24px;
+}
+
+.intro p:last-child,
+.notice p:last-child,
+.contact p:last-child {
+  margin-bottom: 0;
 }
 
 h2 {
-  margin: 1.6em 0 0.5em;
-  font-size: 1.05rem;
-  line-height: 1.45;
-  font-weight: 600;
+  margin: 0 0 12px;
+  font-size: 17px;
+  line-height: 1.5;
+  font-weight: 700;
 }
 
 h3 {
-  margin: 0 0 6px;
-  font-size: 1rem;
-  line-height: 1.45;
+  margin: 16px 0 8px;
+  font-size: 15px;
+  line-height: 1.5;
   font-weight: 600;
 }
 
-p,
+p {
+  margin: 0 0 12px;
+}
+
+ol,
+ul {
+  margin: 0 0 12px;
+  padding-left: 1.4em;
+}
+
 li {
-  margin: 0.45em 0;
+  margin-bottom: 6px;
 }
 
-p,
-li,
+li:last-child {
+  margin-bottom: 0;
+}
+
+.sdk-item p {
+  margin: 0 0 6px;
+}
+
+.sdk-item p:last-child {
+  margin-bottom: 0;
+}
+
 a {
-  overflow-wrap: anywhere;
+  color: #333;
+  text-decoration: underline;
 }
 
-ul,
-ol {
-  margin: 0.4em 0 0.8em;
-  padding-left: 1.3em;
-}
-
-a {
-  color: #1456c0;
-}
-
-.meta {
+.index-list {
+  list-style: none;
   margin: 0;
-  color: #555;
-  font-size: 0.92rem;
+  padding: 0;
 }
 
-.sdk {
-  margin: 12px 0;
-  padding: 12px 0;
-  border-top: 1px solid #e5e5e5;
+.index-list li {
+  margin-bottom: 12px;
+  padding: 14px 16px;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
 }
 
-.sdk p {
-  margin: 0.2em 0;
+.index-list li a {
+  color: #333;
+  text-decoration: none;
+  font-weight: 600;
 }
 
-.foot {
-  margin-top: 28px;
-  padding-top: 16px;
-  border-top: 1px solid #e5e5e5;
-  color: #555;
-  font-size: 0.92rem;
+.index-list li p {
+  margin: 4px 0 0;
+  color: #666;
+  font-size: 13px;
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+
+  .page {
+    padding:
+      max(12px, env(safe-area-inset-top))
+      max(12px, env(safe-area-inset-right))
+      max(28px, env(safe-area-inset-bottom))
+      max(12px, env(safe-area-inset-left));
+  }
+
+  .doc-header h1 {
+    font-size: 20px;
+  }
+
+  h2 {
+    font-size: 16px;
+  }
+
+  h3 {
+    font-size: 14px;
+  }
 }

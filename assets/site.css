@@ -301,6 +301,18 @@ h1 {
   padding: 12px 0 80px;
 }
 
+.app-section {
+  margin-bottom: 36px;
+  scroll-margin-top: 145px;
+}
+
+.app-section h2 {
+  margin: 0 0 12px;
+  font-size: 24px;
+}
+
+.app-section .band { padding: 0; }
+
 .item {
   padding: 24px;
   background: rgba(16, 19, 26, 0.86);
@@ -308,14 +320,16 @@ h1 {
   border-radius: 16px;
 }
 
-.item b {
+.item b,
+.item h3 {
   display: block;
-  margin-bottom: 8px;
+  margin: 0 0 8px;
   color: var(--ink);
   font-size: 15px;
 }
 
 .item p { margin: 0; color: var(--muted); }
+.item p + p { margin-top: 12px; }
 
 .page { padding: 64px 0 80px; }
 

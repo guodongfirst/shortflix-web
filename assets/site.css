@@ -100,6 +100,9 @@ header .wrap {
 }
 
 .name {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   color: var(--ink);
   font-size: 16px;
   font-weight: 650;
@@ -245,8 +248,7 @@ h1 {
 }
 
 .ring,
-.ring-b,
-.ring-c {
+.ring-b {
   position: absolute;
   border-radius: 50%;
 }
@@ -276,22 +278,11 @@ h1 {
   animation: spin 14s linear infinite reverse;
 }
 
-.ring-c {
-  inset: 34%;
-  border: 1px solid rgba(255, 106, 61, 0.55);
-  animation: spin 9s linear infinite;
-}
-
-.core {
+.hero-logo {
   position: absolute;
-  inset: 41%;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #ffd0bc, #ff6a3d 58%, #9a3018);
-  box-shadow: 0 0 36px rgba(255, 106, 61, 0.45);
-  color: #1a0d09;
-  font-weight: 700;
+  inset: 28%;
+  width: 44%;
+  height: auto;
 }
 
 .band {
